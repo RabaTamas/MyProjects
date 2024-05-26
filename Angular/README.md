@@ -11,3 +11,8 @@ also listing the most popular movies related to a movie/theme/genre (according t
 to solve this problem, we recommend one of the following 2 APIs: 
 - http://docs.trakt.apiary.io/  
 - https://www.themoviedb.org/documentation/api?language=hu
+
+![](movieworld_home.png)
+
+![](movieworld_seriesepisodes.png)
+
