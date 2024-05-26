@@ -13,6 +13,6 @@ These are technologies, which I used:
 - HTML
 - JavaScript
 
-[] (moviesview.png)
+[](moviesview.png)
 
-[] (actorsview.png)
+[](actorsview.png)
