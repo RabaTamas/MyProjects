@@ -1,0 +1,82 @@
+<!-- A  sorozat áttekintő adatait jeleníti meg. -->
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <!--Csak akkor jelenik meg, ha vannak adatok. -->
+  <div *ngIf="GetSeriesOverviewResult" class="carousel-inner">
+    <!--Csak akkor jelenik meg, ha van poszterkép. -->
+    <div class="carousel-item active" data-bs-interval="10000" *ngIf="GetSeriesOverviewResult.poster_path">
+      <!-- A poszterkép megjelenítése. -->
+      <img src="https://image.tmdb.org/t/p/original/{{ GetSeriesOverviewResult.backdrop_path }}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h2>{{GetSeriesOverviewResult.original_name}}</h2>
+        <p>{{GetSeriesOverviewResult.overview}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- A sorozat áttekintő adatainak megjelenítése. -->
+<div class="contain mt-3 mb-5 p-4" *ngIf="GetSeriesOverviewResult">
+  <div class="row">
+    <!-- Az első oszlop a sorozat poszterképét jeleníti meg. -->
+    <div class="col-md-2 d-flex align-items-end">
+      <img class="sposter" src="https://image.tmdb.org/t/p/original/{{ GetSeriesOverviewResult.poster_path }}" >
+    </div>
+    <!-- A második oszlop a sorozat áttekintő adatait tartalmazza. -->
+    <div class="col-md-10">
+      <!-- Az eredeti cím, az eredeti nyelv, a pontszám, az első és utolsó adási dátum, szezonok és epizódok száma. -->
+      <p class="text-white info-item"><span class="info-label">Original Title:</span> {{GetSeriesOverviewResult.original_name}}</p>
+      <p class="text-white info-item"><span class="info-label">Original Language:</span> {{GetSeriesOverviewResult.original_language}}</p>
+      <p class="text-white info-item"><span class="info-label">Score:</span> {{GetSeriesOverviewResult.vote_average}} point</p>
+      <p class="text-white info-item"><span class="info-label">First air date:</span> {{GetSeriesOverviewResult.first_air_date}}</p>
+      <p class="text-white info-item"><span class="info-label">Last air date:</span> {{GetSeriesOverviewResult.last_air_date}}</p>
+      <p class="text-white info-item"><span class="info-label">Number of Seasons:</span> {{GetSeriesOverviewResult.number_of_seasons}}</p>
+      <p class="text-white info-item"><span class="info-label">Number of Episodes:</span> {{GetSeriesOverviewResult.number_of_episodes}}</p>
+    </div>
+  </div>
+  <hr class="text-white">
+
+  <!-- A sorozat szereplőinek megjelenítése. -->
+  <div class="row">
+    <h5 class="text-white">Cast</h5>
+    <div class="rowposter mt-3 p-2">
+      <!-- Az összes sorozatszereplő poszterképe, amelyekre kattintva a felhasználó az adott színész adatlapjára navigál. -->
+      <ng-container *ngFor="let t of GetSeriesCastResult">
+        <img src="https://image.tmdb.org/t/p/original/{{ t.profile_path }}" 
+        class="rowimg largeposter" alt="..."
+        [routerLink]="['/actor',t.id]">
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- A szezonválasztó legördülő lista. -->
+  <div>
+    <label for="seasonSelect" class="text-white">Select season:</label>
+    <select id="seasonSelect" (change)="onSeasonChange($event)">
+      <!-- Minden szezonszámhoz egy-egy opció. -->
+      <option *ngFor="let season of seasons" [value]="season">{{ season }}</option>
+    </select>
+  </div>
+
+  <!-- Az adott szezon epizódjainak listája. -->
+  <div class="row mt-3">
+    <!-- Az epizódok listája és a hozzájuk tartozó poszterek. -->
+    <div class="col-md-4">
+      <div class="row">
+        <!-- Minden epizódhoz egy-egy bekezdés, amely tartalmazza az epizód sorszámát, címét és futásidejét. -->
+        <ng-container *ngFor="let episode of GetSeriesEpisodesResult">
+          <p class="text-white info-item">
+            <span class="info-label">{{episode.episode_number}}</span> {{episode.name}} ({{episode.runtime}} minutes)
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <!-- Az epizódokhoz tartozó poszterek megjelenítése. -->
+    <div class="col-md-8">
+      <div class="rowposter mt-3 p-2">
+        <ng-container *ngFor="let t of GetSeriesEpisodesResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.still_path }}" class="rowimg largeposter" alt="...">
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

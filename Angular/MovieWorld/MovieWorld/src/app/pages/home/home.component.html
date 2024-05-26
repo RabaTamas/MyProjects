@@ -1,0 +1,65 @@
+<!-- Carousel rész kezdete -->
+<div class="contain-fluid">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- *ngFor direktíva segítségével iterálunk a TrendingResult tömbön -->
+      <!-- Minden elemet megjelenítünk egy carousel-item osztályú elemként -->
+      <div class="carousel-item active" data-bs-interval="10000" *ngFor="let b of TrendingResult;let i=index"
+        [ngClass]="{active:i===1}"> <!-- Az aktív elemnek adunk active osztályt a ngClass segítségével -->
+        <img src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path }}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2>{{b.original_title}}</h2> <!-- A film címe -->
+          <p>{{b.overview}}</p> <!-- A film rövid leírása -->
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<!-- Carousel rész vége -->
+
+
+<div class="contain mt-3 mb-5 p-4">
+
+
+  <!-- Trending Movies rész kezdete -->
+  <div class="row">
+    <h5 class="text-white">Trending Movies</h5>
+    <div class="rowposter mt-3 p-2">
+      <!-- *ngFor direktíva segítségével iterálunk a TrendingMoviesResult tömbön -->
+      <!-- Minden elemet megjelenítünk egy img elemként, amely a film poszterét tartalmazza -->
+      <!-- A kattintásra navigálja az alkalmazást a film részleteinek megtekintéséhez -->
+      <ng-container *ngFor="let t of TrendingMoviesResult">
+        <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+        class="rowimg largeposter" alt="..."
+        [routerLink]="['/movie',t.id]">
+      </ng-container>
+    </div>
+  </div>
+  <!-- Trending Movies rész vége -->
+
+
+  <!-- Trending Series rész kezdete -->
+  <div class="row">
+  <h5 class="text-white">Trending Series</h5>
+  <div class="rowposter mt-3 p-2">
+    <!-- *ngFor direktíva segítségével iterálunk a TrendingSeriesResult tömbön -->
+    <!-- Minden elemet megjelenítünk egy img elemként, amely a sorozat poszterét tartalmazza -->
+    <!-- A kattintásra navigálja az alkalmazást a sorozat részleteinek megtekintéséhez -->
+    <ng-container *ngFor="let t of TrendingSeriesResult">
+      <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+      class="rowimg largeposter" alt="..."
+      [routerLink]="['/series',t.id]">
+    </ng-container>
+  </div>
+  </div>
+  <!-- Trending Series rész vége -->
+</div>
+

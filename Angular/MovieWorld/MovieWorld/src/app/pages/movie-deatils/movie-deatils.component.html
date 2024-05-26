@@ -1,0 +1,77 @@
+<div class="contain-fluid">
+  <!-- Ha GetMovieOverviewResult változó értéke létezik -->
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <!-- Ha GetMovieOverviewResult változó értéke létezik -->
+      <div *ngIf="GetMovieOverviewResult" class="carousel-inner">
+          <!-- Ha GetMovieOverviewResult.poster_path értéke létezik -->
+          <div class="carousel-item active" data-bs-interval="10000" *ngIf="GetMovieOverviewResult.poster_path">
+              <!-- Film háttérképének megjelenítése -->
+              <img src="https://image.tmdb.org/t/p/original/{{ GetMovieOverviewResult.backdrop_path }}" class="d-block w-100" alt="...">
+              <!-- Film címe és leírása -->
+              <div class="carousel-caption d-none d-md-block">
+                  <h2>{{GetMovieOverviewResult.original_title}}</h2>
+                  <p>{{GetMovieOverviewResult.overview}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="contain mt-3 mb-5 p-4" *ngIf="GetMovieOverviewResult">
+  <!-- Ha GetMovieOverviewResult változó értéke létezik -->
+  <div class="row">
+      <div class="col-md-2 d-flex align-items-end">
+          <!-- Film poszterének megjelenítése -->
+          <img class="sposter" src="https://image.tmdb.org/t/p/original/{{ GetMovieOverviewResult.poster_path }}" >
+      </div>
+      <div class="col-md-4">
+          <div>
+              <!-- Film adatainak megjelenítése -->
+              <p class="text-white info-item"><span class="info-label">Original Title:</span> {{GetMovieOverviewResult.original_title}}</p>
+              <p class="text-white info-item"><span class="info-label">Original Language:</span> {{GetMovieOverviewResult.original_language}}</p>
+              <p class="text-white info-item"><span class="info-label">Release Date:</span> {{GetMovieOverviewResult.release_date}}</p>
+              <p class="text-white info-item"><span class="info-label">Runtime:</span> {{GetMovieOverviewResult.runtime}} minutes</p>
+              <p class="text-white info-item"><span class="info-label">Budget:</span> {{GetMovieOverviewResult.budget}} $</p>
+              <p class="text-white info-item"><span class="info-label">Score:</span> {{GetMovieOverviewResult.vote_average}} point</p>
+              <p class="text-white info-item"><span class="info-label">Status:</span> {{GetMovieOverviewResult.status}}</p>
+          </div>
+      </div>
+  </div>
+  <hr class="text-white">
+  
+  <div class="row">
+      <h5 class="text-white">Cast</h5>
+      <div class="rowposter mt-3 p-2">
+          <!-- A film szereplőinek listázása -->
+          <ng-container *ngFor="let t of GetMovieCastResult">
+              <img src="https://image.tmdb.org/t/p/original/{{ t.profile_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/actor',t.id]">
+          </ng-container>
+      </div>
+  </div>
+
+  <div class="row">
+      <h5 class="text-white">Recommended Movies</h5>
+      <div class="rowposter mt-3 p-2" >
+          <!-- A film ajánlott filmjeinek listázása -->
+          <ng-container *ngFor="let s of GetRecomendMoviesResult">
+              <img src="https://image.tmdb.org/t/p/original/{{ s.poster_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/movie',s.id]">
+          </ng-container>
+      </div>
+  </div>
+
+  <div class="row">
+      <h5 class="text-white">Similar Movies</h5>
+      <div class="rowposter mt-3 p-2" >
+          <!-- A film hasonló filmjeinek listázása -->
+          <ng-container *ngFor="let s of GetSimilarMoviesResult">
+              <img src="https://image.tmdb.org/t/p/original/{{ s.poster_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/movie',s.id]">
+          </ng-container>
+      </div>
+  </div>
+</div>
