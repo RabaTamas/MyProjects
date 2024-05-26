@@ -11,4 +11,8 @@ These are technologies, which I used:
 - ASP.NET Core
 - JSON and JSON.NET
 - HTML
-- JavaScript 
+- JavaScript
+
+[] (moviesview.png)
+
+[] (actorsview.png)
