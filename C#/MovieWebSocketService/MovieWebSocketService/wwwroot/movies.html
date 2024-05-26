@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MoviesEndpoint</title>
+    <script>
+        var wsUrl = getRootUri() + "/movies";
+        var websocket = null;
+        function getRootUri() {
+            return "ws://" +
+                (document.location.hostname == "" ? "localhost" : document.location.hostname)
+                + ":" +
+                (document.location.port == "" ? "8080" : document.location.port);
+
+        }
+        function init() {
+            output = document.getElementById("output");
+            
+        }
+        function initWebSocket() {
+            websocket = new WebSocket(wsUrl);
+            websocket.onopen = function (evt) {
+                onOpen(evt);
+                listMovies();
+               
+            };
+            websocket.onmessage = function (evt) {
+                onMessage(evt);
+            };
+            websocket.onerror = function (evt) {
+                onError(evt);
+                websocket = null;
+            };
+            websocket.onclose = function (evt) {
+                onClose(evt);
+                websocket = null;
+            };
+        }
+
+        function send_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                doSend();
+            }
+        }
+
+        function delete_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                doDelete();
+            }
+        }
+
+        function loadactors_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                loadActors();
+            }
+        }
+
+        function listmovies_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                listMovies();
+            }
+        }
+        function onOpen(evt) {
+            writeToScreen("Connected to endpoint.");
+        }
+        function onMessage(evt) {
+            writeToScreen(evt.data);
+        }
+        function onError(evt) {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+        function onClose(evt) {
+            writeToScreen("Connection closed.");
+        }
+        function doSend() {
+            var moviedata = {
+                "request_type": "movies", "action_type": "create", "entity": {
+                "title": title.value, "description": description.value, "movieimageurl": movieimageurl.value,
+                "year": year.value, "actorids": actorids.value
+                }
+            };
+            console.log(moviedata);
+            /*var moviedata = {
+                "request_type": "movies", "action_type": "create", "title": title.value,
+                "description": description.value, "movieimageurl": movieimageurl.value, "year": year.value, "actorids": actorids.value
+            };*/
+            var data = JSON.stringify(moviedata);
+            websocket.send(data);
+
+            //message = textID.value;
+            //websocket.send(message);
+            writeToScreen("Message Sent: " + data);
+
+
+        }
+        function doDelete() {
+            
+            var moviedeletedata = {
+                "request_type": "movies", "action_type": "delete", "entity": { "movieid": movieid.value }
+            };
+            console.log(moviedeletedata);
+            var data = JSON.stringify(moviedeletedata);
+            websocket.send(data);
+            writeToScreen("Message Sent: " + data);
+
+        }
+        function loadActors() {
+
+            var movieactorsdata = { "request_type": "movies", "action_type": "loadActors" };
+            console.log(movieactorsdata);
+            var data = JSON.stringify(movieactorsdata);
+            websocket.send(data);
+            //websocket.send(JSON.stringify({ "request_type": "movies", "action_type": "loadActors" }));
+
+        }
+        function listMovies() {
+            var moviedata = { "request_type": "movies", "action_type": "list" };
+            console.log(moviedata);
+            var data = JSON.stringify(moviedata);
+            websocket.send(data);
+
+        }
+
+        function writeToScreen(message) {
+            /*var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+
+            output.appendChild(pre);*/
+            try {
+                document.getElementById("output").innerHTML = "";
+                var data = JSON.parse(message);
+                if (data.hasOwnProperty("actors")) {
+
+                    //alert("actors");
+                    var pre = document.createElement("p");
+                    pre.style.wordWrap = "break-word";
+                    pre.innerHTML = message;
+                    output.appendChild(pre);
+                }
+                else {
+
+                    var movies = data["movies"];
+                    var t;
+                    t = document.createElement('table');
+                    for (var i = movies.length - 1, movie; i >= 0; i--) {
+                        movie = movies[i];
+                        _movieID = movie["MovieId"];
+                        _title = movie["title"];
+                        _description = movie["description"];
+                        _imageurl = movie["movieimageurl"];
+                        _actors = movie["actors"];
+                        _year = movie["year"];
+                        var rimage, rdescription, cimage, cdescription;
+                        var c, r;
+                        r = t.insertRow(0);
+                        c = r.insertCell(0);
+                        //cimage.colSpan = "2";
+                        var img = document.createElement('img');
+                        img.src = _imageurl;
+                        img.height = 350;
+                        img.width = 300;
+                        c.appendChild(img);
+                        // r = t.insertRow(1);
+                        c = r.insertCell(1);
+                        c.innerHTML = _movieID;
+                        c = r.insertCell(2);
+                        c.innerHTML = _title;
+                        c = r.insertCell(3);
+                        c.innerHTML = _year;
+                        //r = t.insertRow(2);
+                        c = r.insertCell(4);
+                        //cdescription.colSpan = "2";
+                        c.innerHTML = _description;
+                        c = r.insertCell(5);
+                        c.innerHTML = _actors;
+                    }
+
+                    document.getElementById("output").appendChild(t);
+
+                }
+                
+               
+
+            }
+            catch (Error) {
+
+                var pre = document.createElement("p");
+                pre.style.wordWrap = "break-word";
+                pre.innerHTML = message;
+                output.appendChild(pre);
+
+            }
+            
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body onload="listmovies_message()">
+     <h1 style="text-align: center;">Actions with the Movies</h1>
+
+    <br />
+
+    <div style="text-align: center;">
+        <form action="">
+            <input onclick="send_message()" value="Send" type="button" /><br />
+            <!--
+                <input id="textID" name="message" value="me" type="text" /><br />
+            -->
+            <input id="title" name="title" value="title" type="text" /><br />
+            <input id="description" name="description" value="description" type="text" /><br />
+            <input id="movieimageurl" name="movieimageurl" value="imageurl" type="text" /><br />
+            <input id="year" name="year" value="year" type="text" /><br />
+            <input id="actorids" name="actorids" value="actorid,actorid,..." type="text" /><br />
+        </form>
+        <form action="">
+            <input onclick="delete_message()" value="DeleteById" type="button" /><br />
+            <input id="movieid" name="movieid" value="id for delete" type="text" /><br />
+        </form>
+        <form action="">
+            <input onclick="loadactors_message()" value="loadActors" type="button" /><br />
+        </form>
+
+    </div>
+    <div id="output"></div>
+</body>
+</html>

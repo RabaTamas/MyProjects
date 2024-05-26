@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "tecyX0rBIn18HFeIV67PvygZ3ZIWcQ22ThGgKXzPpGo=",
+  "Source": "MovieWebSocketService",
+  "BasePath": "_content/MovieWebSocketService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MovieWebSocketService\\wwwroot",
+      "Source": "MovieWebSocketService",
+      "ContentRoot": "C:\\Users\\User\\Documents\\Egyetemi munkáim\\MyProjects\\C#\\MovieWebSocketService\\MovieWebSocketService\\wwwroot\\",
+      "BasePath": "_content/MovieWebSocketService",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\User\\Documents\\Egyetemi munkáim\\MyProjects\\C#\\MovieWebSocketService\\MovieWebSocketService\\wwwroot\\actors.html",
+      "SourceId": "MovieWebSocketService",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Documents\\Egyetemi munkáim\\MyProjects\\C#\\MovieWebSocketService\\MovieWebSocketService\\wwwroot\\",
+      "BasePath": "_content/MovieWebSocketService",
+      "RelativePath": "actors.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\actors.html"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Documents\\Egyetemi munkáim\\MyProjects\\C#\\MovieWebSocketService\\MovieWebSocketService\\wwwroot\\movies.html",
+      "SourceId": "MovieWebSocketService",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Documents\\Egyetemi munkáim\\MyProjects\\C#\\MovieWebSocketService\\MovieWebSocketService\\wwwroot\\",
+      "BasePath": "_content/MovieWebSocketService",
+      "RelativePath": "movies.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\movies.html"
+    }
+  ]
+}
