@@ -1,0 +1,15 @@
+CsaladiFilm,A dzsungel konyve,105,2016,6
+Film,A keresztapa,175,1972
+Film,Az ir,209,2019
+CsaladiFilm,Az oroszlankiraly,89,1994,12
+Film,Az utolso szamuraj,154,2003
+Film,Dune,155,2021
+DokumentumFilm,Egy elet a bolygonkon,83,2020,A Fold evolucioja
+Film,Eredet,148,2010
+Film,Gladiator,155,2000
+CsaladiFilm,Harry Potter es a bolcsek kove,152,2001,12
+Film,Joker,200,2019
+CsaladiFilm,Marly meg en,121,2008,12
+CsaladiFilm,Mrs. Doubtfire - Apa csak egy van,126,1993,12
+CsaladiFilm,Nemo nyomaban,96,2003,3
+DokumentumFilm,Schumacher,113,2021,A hires Forma 1-es pilota elete

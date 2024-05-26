@@ -1,0 +1,173 @@
+# depslib dependency file v1.0
+1652105044 source:c:\users\tamas\documents\c++\filmtar\main.cpp
+	<iostream>
+	"filmtar.h"
+	"film.h"
+	"memtrace.h"
+	"gtest_lite.h"
+
+1652104487 c:\users\tamas\documents\c++\filmtar\filmtar.h
+	"csaladi.h"
+	"dokumentumfilm.h"
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652088522 c:\users\tamas\documents\c++\filmtar\csaladi.h
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652088522 c:\users\tamas\documents\c++\filmtar\film.h
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652088522 c:\users\tamas\documents\c++\filmtar\dokumentumfilm.h
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652084313 c:\users\tamas\documents\c++\filmtar\gtest_lite.h
+	<iostream>
+	<cassert>
+	<cmath>
+	<cstring>
+	<limits>
+	<cstdlib>
+	<string>
+	<fstream>
+	<iterator>
+	<regex>
+	"memtrace.h"
+
+1652087282 c:\users\tamas\documents\c++\filmtar\memtrace.h
+	<new>
+	<cstdio>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<list>
+	<map>
+	<algorithm>
+	<functional>
+	<memory>
+	<iomanip>
+	<locale>
+	<typeinfo>
+	<ostream>
+	<stdexcept>
+	<ctime>
+	<iterator>
+	<regex>
+
+1652087141 source:c:\users\tamas\documents\c++\filmtar\test_main.cpp
+	<iostream>
+	"filmtar.h"
+	"film.h"
+	"gtest_lite.h"
+	"memtrace.h"
+
+1652088863 source:c:\users\tamas\documents\c++\filmtar\memtrace.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"memtrace.h"
+
+1652087141 source:c:\users\tamas\documents\c++\filmtar\test.cpp
+	<iostream>
+	"filmtar.h"
+	"film.h"
+	"gtest_lite.h"
+	"memtrace.h"
+
+1652104014 source:c:\users\tamas\documents\filmtar\main.cpp
+	<iostream>
+	"filmtar.h"
+	"film.h"
+	"memtrace.h"
+	"gtest_lite.h"
+
+1652100888 c:\users\tamas\documents\filmtar\filmtar.h
+	"csaladi.h"
+	"dokumentumfilm.h"
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652084924 c:\users\tamas\documents\filmtar\csaladi.h
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652084924 c:\users\tamas\documents\filmtar\film.h
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652083684 c:\users\tamas\documents\filmtar\memtrace.h
+	<new>
+	<cstdio>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<list>
+	<map>
+	<algorithm>
+	<functional>
+	<memory>
+	<iomanip>
+	<locale>
+	<typeinfo>
+	<ostream>
+	<stdexcept>
+	<ctime>
+	<iterator>
+	<regex>
+
+1652084924 c:\users\tamas\documents\filmtar\dokumentumfilm.h
+	"film.h"
+	<iostream>
+	<string.h>
+	<fstream>
+	"memtrace.h"
+
+1652080714 c:\users\tamas\documents\filmtar\gtest_lite.h
+	<iostream>
+	<cassert>
+	<cmath>
+	<cstring>
+	<limits>
+	<cstdlib>
+	<string>
+	<fstream>
+	<iterator>
+	<regex>
+	"memtrace.h"
+
+1652085264 source:c:\users\tamas\documents\filmtar\memtrace.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"memtrace.h"
+
