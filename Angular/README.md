@@ -12,6 +12,8 @@ to solve this problem, we recommend one of the following 2 APIs:
 - http://docs.trakt.apiary.io/  
 - https://www.themoviedb.org/documentation/api?language=hu
 
+# The completed application
+
 ![](movieworld_home.png)
 
 ![](movieworld_seriesepisodes.png)
