@@ -1,0 +1,42 @@
+<div class="contain mt-3 mb-5 p-4">
+  <!-- Ha GetActorDetailsResult változó értéke létezik -->
+  <div *ngIf="GetActorDetailsResult" class="row">
+    <hr class="text-white">
+    <!-- Színész részletes adatainak megjelenítése -->
+    <h3 class="text-white">{{GetActorDetailsResult.name}}</h3>
+    <p class="text-white info-item"><span class="info-label">Birthday:</span> {{GetActorDetailsResult.birthday}}</p>
+    <p class="text-white info-item"><span class="info-label">Place of birth:</span> {{GetActorDetailsResult.place_of_birth}}</p>
+    <p class="text-white info-item"><span class="info-label">Biography:</span> {{GetActorDetailsResult.biography}}</p>
+    <p class="text-white info-item"><span class="info-label">Known for department:</span> {{GetActorDetailsResult.known_for_department}}</p>
+    <p class="text-white info-item"><span class="info-label">Popularity:</span> {{GetActorDetailsResult.popularity}}</p>
+    <hr class="text-white">
+</div>
+
+
+  <div class="row">
+      <!-- Ha GetActorDetailsResult változó értéke létezik -->
+      <h5 *ngIf="GetActorDetailsResult" class="text-white">{{GetActorDetailsResult.name}} is acting in these movies</h5>
+      <div class="rowposter mt-3 p-2">
+        <!-- Színész filmekben való szerepléseinek listázása -->
+        <ng-container *ngFor="let t of GetActorMovieCreditsResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+          class="rowimg largeposter" alt="..."
+          [routerLink]="['/movie',t.id]">
+        </ng-container>
+      </div>
+  </div>
+
+
+  <div class="row">
+      <!-- Ha GetActorDetailsResult változó értéke létezik -->
+      <h5 *ngIf="GetActorDetailsResult" class="text-white">{{GetActorDetailsResult.name}} is acting in these series</h5>
+      <div class="rowposter mt-3 p-2">
+        <!-- Színész sorozatokban való szerepléseinek listázása -->
+        <ng-container *ngFor="let t of GetActorSeriesCreditsResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+          class="rowimg largeposter" alt="..."
+          [routerLink]="['/series',t.id]">
+        </ng-container>
+      </div>
+  </div>
+</div>

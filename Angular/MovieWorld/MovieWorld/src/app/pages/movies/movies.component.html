@@ -1,0 +1,135 @@
+<div class="contain mt-5 p-5">
+  <hr class="text-white">
+  <!-- Űrlap a kereséshez -->
+  <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+      <div class="row">
+          <!-- Keresési mező -->
+          <div class="mb-3 col-lg-10">
+              <input type="text" class="form-control" formControlName="movieName" placeholder="Search Movie">
+          </div>
+          <!-- Keresés gomb -->
+          <div class="col-lg-2">
+              <button class="btn btn-md">Search</button>
+          </div>
+      </div>
+  </form>
+
+  <!-- Keresési eredmények megjelenítése -->
+  <div class="row">
+      <div class="rowposter mt-3 p-2">
+          <!-- Az *ngFor direktíva iterál a searchResult tömbön -->
+          <ng-container *ngFor="let t of searchResult">
+              <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+                   class="rowimg largeposter" alt="..."
+                   [routerLink]="['/movie',t.id]">
+          </ng-container>
+      </div>
+  </div>
+  <hr class="text-white">
+  
+  <!-- A következő blokkokban különböző film kategóriákban található filmek listái kerülnek megjelenítésre -->
+  <!-- Minden kategória esetén ugyanaz az elrendezés van használva: egy cím és a filmek képei -->
+  <div class="row">
+      <h5 class="text-white">Upcoming Movies</h5>
+      <div class="rowposter mt-3 p-2">
+          <ng-container *ngFor="let t of UpcomingMoviesResult">
+              <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+                   class="rowimg largeposter" alt="..."
+                   [routerLink]="['/movie',t.id]">
+          </ng-container>
+      </div>
+  </div>
+
+
+    <div class="row">
+        <h5 class="text-white">TopRated Movies</h5>
+        <div class="rowposter mt-3 p-2">
+          <ng-container *ngFor="let t of TopRatedMoviesResult">
+            <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/movie',t.id]">
+            </ng-container>
+      
+        </div>
+  
+    </div>
+
+    <div class="row">
+        <h5 class="text-white">Popular Movies</h5>
+        <div class="rowposter mt-3 p-2">
+          <ng-container *ngFor="let t of PopularMoviesResult">
+            <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/movie',t.id]">
+            </ng-container>
+      
+        </div>
+  
+    </div>
+    
+    <!-- Az alábbi kategóriáknál a keresés eredménye nem mindig lehet találat, így a *ngIf direktívával ellenőrizzük,
+    hogy a filmek tömbje nem üres-e. Ha üres, akkor a noSuchMovies sablon jelenik meg. -->
+    <div class="row">
+        <h5 class="text-white">Comedy Movies</h5>
+        <div class="rowposter mt-3 p-2" *ngIf="ComedyMoviesResult.length > 0; else noSuchMovies">
+          <ng-container *ngFor="let t of ComedyMoviesResult">
+            <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+              class="rowimg largeposter" alt="..."
+              [routerLink]="['/movie',t.id]">
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="row">
+      <h5 class="text-white">History Movies</h5>
+      <div class="rowposter mt-3 p-2" *ngIf="HistoryMoviesResult.length > 0; else noSuchMovies">
+        <ng-container *ngFor="let t of HistoryMoviesResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+            class="rowimg largeposter" alt="..."
+            [routerLink]="['/movie',t.id]">
+          </ng-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <h5 class="text-white">Crime Movies</h5>
+      <div class="rowposter mt-3 p-2" *ngIf="CrimeMoviesResult.length > 0; else noSuchMovies">
+        <ng-container *ngFor="let t of CrimeMoviesResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+            class="rowimg largeposter" alt="..."
+            [routerLink]="['/movie',t.id]">
+          </ng-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <h5 class="text-white">Action Movies</h5>
+      <div class="rowposter mt-3 p-2" *ngIf="ActionMoviesResult.length > 0; else noSuchMovies">
+        <ng-container *ngFor="let t of ActionMoviesResult">
+          <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+            class="rowimg largeposter" alt="..."
+            [routerLink]="['/movie',t.id]">
+          </ng-container>
+      </div>
+    </div>
+
+  <div class="row">
+    <h5 class="text-white">SciFi Movies</h5>
+    <div class="rowposter mt-3 p-2" *ngIf="SciFiMoviesResult.length > 0; else noSuchMovies">
+      <ng-container *ngFor="let t of SciFiMoviesResult">
+        <img src="https://image.tmdb.org/t/p/original/{{ t.poster_path }}" 
+          class="rowimg largeposter" alt="..."
+          [routerLink]="['/movie',t.id]">
+        </ng-container>
+    </div>
+  </div>
+
+  <!-- noSuchMovies sablon, ha nincsenek találatok -->
+  <ng-template #noSuchMovies>
+    <div class="row">
+      <p class="text-white">No results for such movies!</p>
+    </div>
+  </ng-template>
+    
+
+</div>

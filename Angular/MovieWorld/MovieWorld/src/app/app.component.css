@@ -1,0 +1,17 @@
+.navbar
+{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar .navbar-brand
+{
+    font-style: italic;
+    font-weight: bold;
+    color: antiquewhite;
+}
+
+.navbar-nav .nav-item .nav-link
+{
+    color: antiquewhite;
+}
+
