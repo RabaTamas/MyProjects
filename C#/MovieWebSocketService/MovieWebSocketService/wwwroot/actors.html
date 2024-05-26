@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ActorsEndpoint</title>
+    <script>
+        var wsUrl = getRootUri() + "/actors";
+        var websocket = null;
+        function getRootUri() {
+            return "ws://" +
+                (document.location.hostname == "" ? "localhost" : document.location.hostname)
+                + ":" +
+                (document.location.port == "" ? "8080" : document.location.port);
+
+        }
+        function init() {
+            output = document.getElementById("output");
+        }
+        function initWebSocket() {
+            websocket = new WebSocket(wsUrl);
+            websocket.onopen = function (evt) {
+                onOpen(evt);
+                listActors();
+               
+                
+            };
+            websocket.onmessage = function (evt) {
+                onMessage(evt);
+            };
+            websocket.onerror = function (evt) {
+                onError(evt);
+                websocket = null;
+            };
+            websocket.onclose = function (evt) {
+                onClose(evt);
+                websocket = null;
+            };
+        }
+
+        function send_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                doSend();
+              
+            }
+        }
+        function delete_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                
+                doDelete();
+            }
+        }
+        function loadmovies_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                loadMovies();
+            }
+        }
+
+        function listactors_message() {
+            if (websocket == null) {
+                initWebSocket();
+            } else {
+                listActors();
+            }
+        }
+
+        function onOpen(evt) {
+            writeToScreen("Connected to endpoint.");
+        }
+        function onMessage(evt) {
+            writeToScreen(evt.data);
+        }
+        function onError(evt) {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+        function onClose(evt) {
+            writeToScreen("Connection closed.");
+        }
+        function doSend() {
+           
+            var actordata = {
+                "request_type": "actors", "action_type": "create", "entity": {
+                    "name": actorname.value, "cv": cv.value,
+                    "pictureurl": pictureurl.value, "movieids": movieids.value
+                }
+            };
+            var data = JSON.stringify(actordata);
+            websocket.send(data);
+
+            
+            writeToScreen("Message Sent: " + data);
+
+        }
+
+        function doDelete() {
+            //var actordata = { "name": actorname.value, "cv": cv.value, "pictureurl": pictureurl.value };
+            var actordeletedata = {
+                "request_type": "actors", "action_type": "delete", "entity": {"actorid": actorid.value} };
+            var data = JSON.stringify(actordeletedata);
+            websocket.send(data);
+
+            //message = textID.value;
+            //websocket.send(message);
+            writeToScreen("Message Sent: " + data);
+
+        }
+        function loadMovies() {
+
+            websocket.send(JSON.stringify({ "request_type": "actors", "action_type": "loadMovies" }));
+
+        }
+        function listActors() {
+            var actordata = { "request_type": "actors", "action_type": "list" };
+            var data = JSON.stringify(actordata);
+            websocket.send(data);
+
+        }
+       
+
+        function writeToScreen(message) {
+            /*var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+
+            output.appendChild(pre);*/
+
+            try {
+                document.getElementById("output").innerHTML = "";
+                var data = JSON.parse(message);
+                if (data.hasOwnProperty("movies")) {
+
+                    var pre = document.createElement("p");
+                    pre.style.wordWrap = "break-word";
+                    pre.innerHTML = message;
+                    output.appendChild(pre);
+                }
+                else {
+
+                    var actors = data["actors"];
+                    var t;
+                    t = document.createElement('table');
+                    for (var i = actors.length - 1, actor; i >= 0; i--) {
+                        actor = actors[i];
+                        _actorID = actor["ActorId"];
+                        _name = actor["name"];
+                        _cv = actor["cv"];
+                        _imageurl = actor["actorimageurl"];
+                        _movies = actor["movies"];
+                        var c, r;
+                        r = t.insertRow(0);
+                        c = r.insertCell(0);
+                        //cimage.colSpan = "2";
+                        var img = document.createElement('img');
+                        img.src = _imageurl;
+                        img.height = 200;
+                        img.width = 150;
+                        c.appendChild(img);
+                        // r = t.insertRow(1);
+                        c = r.insertCell(1);
+                        c.innerHTML = _actorID;
+                        c = r.insertCell(2);
+                        c.innerHTML = _name;
+                        //r = t.insertRow(2);
+                        c = r.insertCell(3);
+                        //cdescription.colSpan = "2";
+                        c.innerHTML = _cv;
+                        c = r.insertCell(4);
+                        c.innerHTML = _movies;
+                    }
+
+                    document.getElementById("output").appendChild(t);
+
+                }
+
+
+
+            }
+            catch (Error) {
+
+                var pre = document.createElement("p");
+                pre.style.wordWrap = "break-word";
+                pre.innerHTML = message;
+                output.appendChild(pre);
+
+            }
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body onload="listactors_message()">
+    <h1 style="text-align: center;">Actions with the Actors</h1>
+
+    <br />
+
+    <div style="text-align: center;">
+        <form action="">
+            <input onclick="send_message()" value="Send" type="button" /><br />
+            <!--
+            <input id="textID" name="message" value="me" type="text" /><br />
+        -->
+            <input id="actorname" name="name" value="name" type="text" /><br />
+            <input id="cv" name="cv" value="cv" type="text" /><br />
+            <input id="pictureurl" name="pictureurl" value="pictureurl" type="text" /><br />
+            <input id="movieids" name="movieids" value="movieid,movieid,..." type="text" /><br />
+        </form>
+
+        <form action="">
+            <input onclick="delete_message()" value="DeleteById" type="button" /><br />
+            <input id="actorid" name="actorid" value="id for delete" type="text" /><br />
+        </form>
+        <form action="">
+            <input onclick="loadmovies_message()" value="loadMovies" type="button" /><br />
+        </form>
+
+    </div>
+    <div id="output"></div>
+</body>
+</html>
