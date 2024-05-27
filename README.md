@@ -5,11 +5,11 @@ I have grouped my works into separate folders according to programming languages
 
 # Preview of some of my works
 
-![](Java/MovieStore/image.png)
+![](C++/Lehallgatastervezo/lehallgatastervezo.png)
 
 ![](C++/UFO%20hami/ufohami.png)
 
-![](C++/Lehallgatastervezo/lehallgatastervezo.png)
+![](Java/MovieStore/image.png)
 
 ![](C#/MovieWebSocketService/moviesview.png)
 
