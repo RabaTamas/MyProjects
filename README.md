@@ -11,7 +11,7 @@ I have grouped my works into separate folders according to programming languages
 
 ![](Java/MovieStore/image.png)
 
-![](C#/MovieWebSocketService/moviesview.png)
+![](C#/MovieWebSocketService/actorsview.png)
 
 ![](Angular/MovieWorld/movieworld_home.png)
 
