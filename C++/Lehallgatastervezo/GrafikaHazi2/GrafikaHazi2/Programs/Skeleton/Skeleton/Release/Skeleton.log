@@ -1,0 +1,65 @@
+﻿  framework.cpp
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\framework.h(167,17): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compiling source file 'framework.cpp')
+  
+  Skeleton.cpp
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\framework.h(167,17): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compiling source file 'Skeleton.cpp')
+  
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(77,10): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(78,10): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(79,10): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(207,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(208,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(209,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(217,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(309,49): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(311,55): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(313,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(313,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(335,30): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(345,14): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(351,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(352,13): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(355,41): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(357,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(367,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(368,13): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(371,36): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(373,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(374,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(383,15): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(384,13): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(387,36): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(389,18): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(390,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(408,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(409,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(410,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(430,26): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(431,26): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(432,26): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(452,28): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(453,28): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(454,28): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(473,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(474,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(475,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(486,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(487,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(488,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(526,21): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(527,21): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(528,21): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(655,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(656,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(657,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(665,51): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(681,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(682,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\Skeleton\Skeleton.cpp(683,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Generating code
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 171 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Skeleton.vcxproj -> C:\Users\User\Documents\Projektjeim\MyProjects\C++\Lehallgatastervezo\GrafikaHazi2\GrafikaHazi2\Programs\Skeleton\bin\Skeleton.exe
