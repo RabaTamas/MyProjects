@@ -16,7 +16,7 @@ I store the necessary ingredients from a recipe (e.g. 2 kg of flour, 1 tablespoo
 - Intent
 - Api
 
-
+# Completed task
 ![](recipes_1.png)
 
 ![](recipes_2.png)
