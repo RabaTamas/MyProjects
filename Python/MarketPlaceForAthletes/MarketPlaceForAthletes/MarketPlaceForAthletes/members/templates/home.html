@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     
+    <!-- Header-->
+    {% include 'header.html' %}
+    <!-- Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <form method="GET" action="{% url 'home' %}">
+                        <h5>Search</h5>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search items..." name="search" value="{{ request.GET.search }}"/>
+                            <button class="btn btn-dark" type="submit">Search</button>
+                        </div>
+
+                        <h5>Sort</h5>
+                        <select name="sort" id="sort" class="form-control" onchange="this.form.submit()">
+                            <option value="">Choose...</option>
+                            <option value="name_asc" {% if sort_option == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                            <option value="name_desc" {% if sort_option == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                            <option value="price_asc" {% if sort_option == 'price_asc' %}selected{% endif %}>Price (increase)</option>
+                            <option value="price_desc" {% if sort_option == 'price_desc' %}selected{% endif %}>Price (decrease)</option>
+                        </select>
+                        <h5>Filter by Condition</h5>
+                        {% for condition in conditions %}
+                        <div>
+                            <input type="checkbox" name="conditions" value="{{ condition.id }}"
+                                {% if condition.id|stringformat:"s" in selected_conditions %}checked{% endif %}>
+                            <label>{{ condition.name }}</label>
+                        </div>
+                        {% endfor %}
+
+                        <h5>Filter by Sport</h5>
+                        {% for sport in sports|slice:":8" %}
+                        <div>
+                            <input type="checkbox" name="sports" value="{{ sport.id }}"
+                                {% if sport.id|stringformat:"s" in selected_sports %}checked{% endif %}>
+                            <label>{{ sport.name }}</label>
+                        </div>
+                        {% endfor %}
+
+
+                        <div id="more-sports" style="display: none;">
+                            {% for sport in sports|slice:"8:" %}
+                            <div>
+                                <input type="checkbox" name="sports" value="{{ sport.id }}"
+                                    {% if sport.id|stringformat:"s" in selected_sports %}checked{% endif %}>
+                                <label>{{ sport.name }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <button type="button" class="btn btn-link" id="toggle-sports">More sport</button>
+
+                        <script>
+                            document.getElementById('toggle-sports').addEventListener('click', function() {
+                                const moreSports = document.getElementById('more-sports');
+                                const button = document.getElementById('toggle-sports');
+                                if (moreSports.style.display === 'none') {
+                                    moreSports.style.display = 'block';
+                                    button.textContent = 'Less sport';
+                                } else {
+                                    moreSports.style.display = 'none';
+                                    button.textContent = 'More sport';
+                                }
+                            });
+                        </script>
+                        
+
+                        <button type="submit" class="btn btn-dark mt-2">Filter</button>
+                    </form>
+                </div>
+                <!-- Main content (items list) -->
+                <div class="col-md-9">
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        {% for item in items %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">{{ item.name }}</h5>
+                                        <p>Condition: {{ item.condition }}</p>
+                                        <p>Price: {{ item.price }} Ft</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item' item.id %}">View</a></div>
+                                </div>
+                                {% if item.sold %}
+                                <div class="position-absolute top-0 end-0 m-2 badge bg-danger">Sold</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+       
+    
+{% endblock %} 
