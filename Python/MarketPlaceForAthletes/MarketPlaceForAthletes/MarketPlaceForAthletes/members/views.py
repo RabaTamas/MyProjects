@@ -2,8 +2,8 @@ import json
 import os
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth import login, authenticate, logout
-from .forms import UserSignUpForm, ProfileSignUpForm, CreateListingForm, EditListingForm, UserEditForm
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
+from .forms import UserSignUpForm, ProfileSignUpForm, CreateListingForm, EditListingForm, UserEditForm, UserPasswordChangeForm
 from django.contrib import messages
 from items.models import Item, ItemCondition, Sport
 from django.contrib.auth.decorators import login_required
@@ -174,11 +174,25 @@ def my_profile(request):
             return redirect('my_profile')
         else:
             messages.error(request, "An error occurred. Please try again.")
-    else:
-        user_form = UserEditForm(instance=user)
-        profile_form = ProfileSignUpForm(instance=profile)
+    
+    user_form = UserEditForm(instance=user)
+    profile_form = ProfileSignUpForm(instance=profile)
 
     return render(request, 'my_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        passwordform  = UserPasswordChangeForm(user=request.user, data=request.POST)
+        if passwordform.is_valid():
+            passwordform.save()
+            update_session_auth_hash(request, request.user)
+            return redirect('my_profile')
+        else:
+            messages.error(request, passwordform.error_messages)
+            return redirect('change_password')
+    else:
+        return render(request, 'change_password.html', {'form': UserPasswordChangeForm(request.user)})
