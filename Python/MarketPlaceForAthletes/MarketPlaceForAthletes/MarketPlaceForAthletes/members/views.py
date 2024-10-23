@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout, update_session_auth
 from .forms import UserSignUpForm, ProfileSignUpForm, CreateListingForm, EditListingForm, UserEditForm, UserPasswordChangeForm
 from django.contrib import messages
 from items.models import Item, ItemCondition, Sport
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -72,9 +73,15 @@ def home(request):
     elif sort_option == 'price_desc':
         items = items.order_by('-price')
 
+    #paginator = Paginator(items, 8)
+    #page_number = request.GET.get('page')
+    #page_obj = paginator.get_page(page_number)
+
+    
     image_urls = get_header_images()
 
     return render(request, 'home.html', {
+        #'page_obj': page_obj,
         'items': items,
         'sports': sports,
         'conditions': conditions,
