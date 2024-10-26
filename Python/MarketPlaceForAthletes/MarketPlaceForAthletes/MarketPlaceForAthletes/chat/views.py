@@ -4,23 +4,31 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.serializers import serialize
 import json
+from django.contrib.auth.models import User
+from items.models import Item
 # Create your views here.
 
-# def index(request):
-#     return render(request, "chat/index.html")
-
 @login_required
-def chat(request):
-    #chats = serialize(format='json', queryset=Chat.GetChatByParticipant(request.user))
-    #chats = Chat.GetChatByParticipant(request.user)
-    #return render(request, "chat/room.html", {"sender": request.user.pk, "chats": chats})
+def chat(request, pk = None):
     return render(request, "room.html", {"sender": request.user.pk})
 
 @login_required
 def getChats(request):
-    #chats = serialize(format='json', queryset=Chat.GetChatByParticipant(request.user))
     chats = Chat.GetChatByParticipant(request.user)
     output = []
+    try:
+        item = Item.objects.filter(pk = request.GET["itempk"]).first()
+        empty_chat = Chat.GetChatByParticipants(request.user, item.advertiser.user, item, False)
+        #if not empty_chat.exists():
+        output.append({
+            "pk": empty_chat.pk,
+            "item": {"pk": empty_chat.item.pk, "name": f"{empty_chat.item.name}"},
+            "participant1": {"pk": empty_chat.participant1.pk, "name": f"{empty_chat.participant1.first_name} {empty_chat.participant1.last_name}"},
+            "participant2": {"pk": empty_chat.participant2.pk, "name": f"{empty_chat.participant2.first_name} {empty_chat.participant2.last_name}"},
+            "last_message": ""
+        })
+    except:
+        pass
     for chat in chats:
         message = chat.GetMessages().last()
         last_message = {
@@ -34,7 +42,7 @@ def getChats(request):
             "item": {"pk": chat.item.pk, "name": f"{chat.item.name}"},
             "participant1": {"pk": chat.participant1.pk, "name": f"{chat.participant1.first_name} {chat.participant1.last_name}"},
             "participant2": {"pk": chat.participant2.pk, "name": f"{chat.participant2.first_name} {chat.participant2.last_name}"},
-            "last_message": last_message #model_to_dict(chat.GetMessages().latest('timestamp'))
+            "last_message": last_message
         })
     
     return JsonResponse({"chats": json.dumps(output)})

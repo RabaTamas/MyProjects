@@ -15,13 +15,15 @@ class Chat(models.Model):
         UniqueConstraint(fields=["participant1", "participant2", "item"], name="participants_item_unique_together")
 
     @staticmethod
-    def GetChatByParticipants(participant1, participant2, item):
+    def GetChatByParticipants(participant1, participant2, item, saveifnotexists = True):
         if participant1.pk < participant2.pk:
             participant2, participant1 = participant1, participant2
         try:
             return Chat.objects.get(participant1 = participant1, participant2 = participant2, item = item)
         except ObjectDoesNotExist:
-            return Chat.objects.create(participant1 = participant1, participant2 = participant2, item = item)
+            if saveifnotexists:
+                return Chat.objects.create(participant1 = participant1, participant2 = participant2, item = item)
+            return Chat(participant1 = participant1, participant2 = participant2, item = item)
     
     @staticmethod
     def GetChatByParticipant(participant):
@@ -45,11 +47,3 @@ class ChatMessage(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now=True)
     isread = models.BooleanField(default=False)
-
-    # @property
-    # def sender_name(self):
-    #     return f"{self.sender.first_name} {self.sender.last_name}"
-    
-    # @property
-    # def receiver_name(self):
-    #     return f"{self.sender.first_name} {self.sender.last_name}"

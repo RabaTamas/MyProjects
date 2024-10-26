@@ -50,7 +50,11 @@ def home(request):
     selected_sports = request.GET.getlist('sports')
     search_query = request.GET.get('search')
 
-    items = Item.objects.all()
+    items = Item.objects.filter(sold = False)
+    
+    if request.user.is_authenticated:
+        items = items.exclude(advertiser=request.user.profile)
+
     if search_query:
         items = items.filter(name__icontains=search_query)
 
@@ -121,7 +125,8 @@ def item(request, pk):
 
     return render(request, 'item.html', {
         'item': current_item,
-        'related_items': related_items
+        'related_items': related_items,
+        #'userpk': current_item.profile.user.pk
     })
 
 

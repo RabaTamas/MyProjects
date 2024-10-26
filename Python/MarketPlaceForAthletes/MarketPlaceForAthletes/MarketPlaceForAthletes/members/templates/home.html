@@ -93,14 +93,12 @@
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item' item.id %}">View</a></div>
                                 </div>
-                                {% if item.sold %}
-                                <div class="position-absolute top-0 end-0 m-2 badge bg-danger">Sold</div>
-                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
                     </div>
 
+                    
                 </div>
 
             </div>

@@ -9,23 +9,9 @@
     <div class="col-sm-4 col-xl-3 overflow-hidden d-none d-sm-block">
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white border shadow" style="height: 100%;">
             <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-              <!-- <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg> -->
               <span class="fs-5 fw-semibold"><i class="bi bi-chat-dots-fill"></i> Chats</span>
             </a>
             <div class="list-group list-group-flush border-bottom overflow-scroll" id="users-list">
-            <!-- {% for chat in chats %}
-              <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" id="{{ chat.pk }}">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                  {% if chat.participant1 == request.user.pk %}
-                    <strong class="mb-1">{{ chat.participant2 }}</strong>
-                  {% else %}
-                      <strong class="mb-1">{{ chat.participant1 }}</strong>
-                  {% endif %}
-                  <small>Wed</small>
-                </div>
-                <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-              </a>
-            {% endfor %} -->
             </div>
           </div>
     </div>
@@ -53,19 +39,18 @@
         + window.location.host
         + '/ws/chat/'
     );
-
+    
     
     $(document).ready(function() {
         getChats();
-        // for(let chat of JSON.parse('{{ chats|safe }}')) {
-        //     console.log(chat.pk);
-        //     getChatContent(chat.pk);
-        // }
     });
 
     let getChats = () => {
         $.ajax({
             type: 'GET',
+            data: {
+                "itempk": window.location.href.split("/").slice(-2,-1)[0]
+            },
             url: "{% url 'get_chats' %}",
             success: function(result) {
                 chats = JSON.parse(result.chats)
@@ -93,7 +78,6 @@
             success: function(result){
                 chat_area = document.getElementById("chat_area")
                 chat_area.innerText = "";
-                //for (let message of JSON.parse(result.messages)) { 
                 for (let message of JSON.parse(result.messages)) {
                     console.log((message));
                     createMessageCard(message);                    
@@ -140,7 +124,6 @@
         col.appendChild(card);
         row.appendChild(col);
         chat_area.appendChild(row)
-        //chat_area.appendChild(card);
         chat_area.scrollBy(0,chat_area.scrollHeight);
     }
 
@@ -155,18 +138,15 @@
         clickableListItem.id = "chat_"+chat.pk;
         clickableListItem.onclick = function () {
             clickableListItems = document.getElementsByClassName("chat-list-group-item active");
-            //clickableListItems = clickableListItems.getElementsByClassName("active");
             
             for(let item of clickableListItems) {
                 console.log("remove");
                 console.log(clickableListItems.length);
                 item.classList.remove("active");
             }
-            // clickableListItems.forEach((item) => item.classList.remove("active"));
             this.classList.add("active");
             let id = this.id.split("_")[1];
             getChatContent(id);
-            //alert(id);
         }
 
         let container = document.createElement('div');
@@ -206,8 +186,13 @@
 
         let lastMessage = document.createElement('div');
         lastMessage.className = 'col-10 mb-1 small message text-truncate d-none d-lg-block';
-        lastMessage.innerText = chat.last_message.sender.name.split(" ")[0] + ": " + chat.last_message.message.replace(/(\r\n|\n|\r)/gm, "").substring(0, 20);
-        //alert(parseInt((new Date() - new Date(chat.last_message.timestamp))/1000));
+        try{ 
+            lastMessage.innerText = chat.last_message.sender.name.split(" ")[0] + ": " + chat.last_message.message.replace(/(\r\n|\n|\r)/gm, "").substring(0, 20);
+        }catch{
+
+            lastMessage.innerText = "";
+        }
+       
 
         profile_picture_container.appendChild(profile_picture);
 
@@ -221,20 +206,12 @@
 
         clickableListItem.appendChild(row);
         usersList.appendChild(clickableListItem);
-
-        // container.appendChild(partnerName);
-        // container.appendChild(date);
-        // clickableListItem.appendChild(container);
-        // clickableListItem.appendChild(lastMessage);
-        // usersList.appendChild(clickableListItem);
     }
 
     let updateSidebarItem = (data) => {
-        //console.log(data);
         document.getElementById("chat_"+data.chat).getElementsByClassName("message")[0].innerText = data.sender.name.split(" ")[0]+": "+data.message;
         document.getElementById("chat_"+data.chat).getElementsByClassName("date")[0].innerText = dateTimeDiff(data.timestamp);
         document.getElementById("chat_"+data.chat).getElementsByClassName("date")[0]._variable = data.timestamp;
-
     }
 
     let dateTimeDiff = (datetime_data) => {
@@ -328,7 +305,3 @@
 </script>
 
 {% endblock %}
-{% comment %}
-</body>
-</html>
-{% endcomment %}
