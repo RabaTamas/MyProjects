@@ -34,6 +34,8 @@ class Item(models.Model):
     image = models.ImageField(upload_to='uploads/item/', default='uploads/item/noimage.png')
     condition = models.ForeignKey(ItemCondition, related_name='items', on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['name']
 
     def __str__(self) -> str:
         return self.name

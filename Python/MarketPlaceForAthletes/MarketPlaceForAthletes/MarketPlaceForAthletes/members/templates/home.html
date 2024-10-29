@@ -13,7 +13,7 @@
                         <h5>Search</h5>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search items..." name="search" value="{{ request.GET.search }}"/>
-                            <button class="btn btn-dark" type="submit">Search</button>
+                            <button class="bi bi-search" type="submit"></button>
                         </div>
 
                         <h5>Sort</h5>
@@ -77,7 +77,7 @@
                 <!-- Main content (items list) -->
                 <div class="col-md-9">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                        {% for item in items %}
+                        {% for item in page_obj %}
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
@@ -97,6 +97,34 @@
                         </div>
                         {% endfor %}
                     </div>
+
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link bg-dark text-white" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if sort_option %}sort={{ sort_option }}&{% endif %}{% for condition in selected_conditions %}conditions={{ condition }}&{% endfor %}{% for sport in selected_sports %}sports={{ sport }}&{% endfor %}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active"><span class="page-link bg-dark text-white">{{ num }}</span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link bg-dark text-white" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if sort_option %}sort={{ sort_option }}&{% endif %}{% for condition in selected_conditions %}conditions={{ condition }}&{% endfor %}{% for sport in selected_sports %}sports={{ sport }}&{% endfor %}page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link bg-dark text-white" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if sort_option %}sort={{ sort_option }}&{% endif %}{% for condition in selected_conditions %}conditions={{ condition }}&{% endfor %}{% for sport in selected_sports %}sports={{ sport }}&{% endfor %}page={{ page_obj.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
 
                     
                 </div>

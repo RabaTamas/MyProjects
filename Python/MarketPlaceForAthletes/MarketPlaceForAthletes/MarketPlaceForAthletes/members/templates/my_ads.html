@@ -5,10 +5,16 @@
     <div class="col-12">
         <div class="d-flex justify-content-between mt-3">
             <h3 class="h3 mb-3 fw-normal">My Ads</h3>
-            <a href="{% url 'addlisting' %}" class="w-30 btn btn-lg btn-dark">Add New</a>
+            <div>
+                <button type="submit" form="delete-form" class="btn btn-danger" title="Delete Selected">
+                    <i class="bi bi-trash"></i>
+                </button>
+                
+                <a href="{% url 'addlisting' %}" class="btn btn-dark me-2">Add New</a>
+            </div>
         </div>
         
-        <form method="POST" action="{% url 'my_ads' %}">
+        <form id="delete-form" method="POST" action="{% url 'my_ads' %}">
             {% csrf_token %}
 
             {% if user_items %}
@@ -41,9 +47,7 @@
             </div>
             {% endfor %}
 
-            <br></br>
-            <button type="submit" class="w-100 btn btn-lg btn-danger">Delete Confirm</button>
-            <br></br>
+           
             {% else %}
             <p>You have no ads yet.</p>
             {% endif %}

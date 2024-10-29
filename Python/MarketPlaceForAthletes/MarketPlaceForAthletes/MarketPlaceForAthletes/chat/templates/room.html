@@ -159,7 +159,7 @@
         profile_picture_container.className='col-2 align-items-center justify-content-between p-1'
 
         let profile_picture = document.createElement('img');
-        profile_picture.src = "https://w7.pngwing.com/pngs/41/829/png-transparent-spongebob-running-cartoons-spongebob-thumbnail.png"
+        profile_picture.src = chat.item.image ? chat.item.image : '/static/images/noimage.png';
         profile_picture.style = "height: 40px";
         profile_picture.className = "rounded"
 
@@ -169,7 +169,7 @@
         let itemName = document.createElement('strong');
         itemName.innerText = chat.item.name;
         itemName.id = chat.item.pk;
-        let partnerName = document.createElement('strong');
+        let partnerName = document.createElement('div');
         partnerName.className = 'mb-1';
         if(chat.participant1.pk == '{{ request.user.pk }}') {
             partnerName.innerText =  chat.participant2.name;
@@ -200,6 +200,7 @@
         text_container.appendChild(partnerName);
         text_container.appendChild(date);
         text_container.appendChild(lastMessage);
+        
                 
         row.appendChild(profile_picture_container);
         row.appendChild(text_container);

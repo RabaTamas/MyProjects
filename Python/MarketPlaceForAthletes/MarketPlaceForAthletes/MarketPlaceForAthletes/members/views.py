@@ -77,16 +77,15 @@ def home(request):
     elif sort_option == 'price_desc':
         items = items.order_by('-price')
 
-    #paginator = Paginator(items, 8)
-    #page_number = request.GET.get('page')
-    #page_obj = paginator.get_page(page_number)
-
+    paginator = Paginator(items, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     image_urls = get_header_images()
 
     return render(request, 'home.html', {
-        #'page_obj': page_obj,
-        'items': items,
+        'page_obj': page_obj,
+        #'items': items,
         'sports': sports,
         'conditions': conditions,
         'selected_sports': selected_sports,
