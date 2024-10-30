@@ -216,7 +216,7 @@ def change_password(request):
 def advertisers(request):
     search_query = request.GET.get('search', '').strip()
     sort_option = request.GET.get('sort')
-    page = request.GET.get('page', 1)  # A jelenlegi oldal lekérdezése
+    page = request.GET.get('page', 1) 
     
     advertisers = Profile.objects.annotate(average_score=Avg('user__received_scores__score'))
 
