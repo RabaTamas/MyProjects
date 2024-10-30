@@ -18,15 +18,15 @@ def getChats(request):
     output = []
     try:
         item = Item.objects.filter(pk = request.GET["itempk"]).first()
-        empty_chat = Chat.GetChatByParticipants(request.user, item.advertiser.user, item, False)
-        #if not empty_chat.exists():
-        output.append({
-            "pk": empty_chat.pk,
-            "item": {"pk": empty_chat.item.pk, "name": f"{empty_chat.item.name}"},
-            "participant1": {"pk": empty_chat.participant1.pk, "name": f"{empty_chat.participant1.first_name} {empty_chat.participant1.last_name}"},
-            "participant2": {"pk": empty_chat.participant2.pk, "name": f"{empty_chat.participant2.first_name} {empty_chat.participant2.last_name}"},
-            "last_message": ""
-        })
+        if not Chat.GetChatByItem(item):
+            empty_chat = Chat.GetChatByParticipants(request.user, item.advertiser.user, item, False)
+            output.append({
+                "pk": empty_chat.pk,
+                "item": {"pk": empty_chat.item.pk, "name": f"{empty_chat.item.name}", "imagepath": f"{empty_chat.item.image.url}"},
+                "participant1": {"pk": empty_chat.participant1.pk, "name": f"{empty_chat.participant1.first_name} {empty_chat.participant1.last_name}"},
+                "participant2": {"pk": empty_chat.participant2.pk, "name": f"{empty_chat.participant2.first_name} {empty_chat.participant2.last_name}"},
+                "last_message": ""
+            })
     except:
         pass
     for chat in chats:
@@ -39,7 +39,7 @@ def getChats(request):
         }
         output.append({
             "pk": chat.pk,
-            "item": {"pk": chat.item.pk, "name": f"{chat.item.name}"},
+            "item": {"pk": chat.item.pk, "name": f"{chat.item.name}", "imagepath": f"{chat.item.image.url}"},
             "participant1": {"pk": chat.participant1.pk, "name": f"{chat.participant1.first_name} {chat.participant1.last_name}"},
             "participant2": {"pk": chat.participant2.pk, "name": f"{chat.participant2.first_name} {chat.participant2.last_name}"},
             "last_message": last_message
@@ -51,16 +51,17 @@ def getChats(request):
 def getConversation(request):
     chat_id = request.GET.get('chat_id')
     print("chat_id is ", chat_id)
-    chat = Chat.GetChatById(int(chat_id))
-    messages = chat.GetMessages()
     output = []
-    for message in messages:
-        output.append({
-            "message": message.content,
-            "receiver": {"pk": message.receiver.pk, "name": f"{message.receiver.first_name} {message.receiver.last_name}"},
-            "sender": {"pk": message.sender.pk, "name": f"{message.sender.first_name} {message.sender.last_name}"},
-            "timestamp": str(message.timestamp)
-        })
-    messages = serialize(format='json', queryset=messages)
+    try:
+        chat = Chat.GetChatById(int(chat_id))
+        messages = chat.GetMessages()
+        for message in messages:
+            output.append({
+                "message": message.content,
+                "receiver": {"pk": message.receiver.pk, "name": f"{message.receiver.first_name} {message.receiver.last_name}"},
+                "sender": {"pk": message.sender.pk, "name": f"{message.sender.first_name} {message.sender.last_name}"},
+                "timestamp": str(message.timestamp)
+            })
+    except:
+        pass
     return JsonResponse({"messages": json.dumps(output)})
-

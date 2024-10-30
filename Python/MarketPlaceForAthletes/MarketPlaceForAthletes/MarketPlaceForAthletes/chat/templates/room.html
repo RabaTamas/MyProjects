@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-<!-- chat/templates/chat/room.html -->
 
 
 {% block content %}
-
 
 <div class="row justify-content-center" >
     <div class="col-sm-4 col-xl-3 overflow-hidden d-none d-sm-block">
@@ -141,6 +139,12 @@
             
             for(let item of clickableListItems) {
                 console.log("remove");
+                if(this.id != "chat_null") {
+                    try {
+                        document.getElementById("chat_null").remove();
+                    }
+                    catch { }
+                }
                 console.log(clickableListItems.length);
                 item.classList.remove("active");
             }
@@ -155,13 +159,13 @@
         let row = document.createElement('div');
         row.className='row';
         
-        let profile_picture_container = document.createElement('div');
-        profile_picture_container.className='col-2 align-items-center justify-content-between p-1'
+        let item_picture_container = document.createElement('div');
+        item_picture_container.className='col-2 align-items-center justify-content-between p-1'
 
-        let profile_picture = document.createElement('img');
-        profile_picture.src = chat.item.image ? chat.item.image : '/static/images/noimage.png';
-        profile_picture.style = "height: 40px";
-        profile_picture.className = "rounded"
+        let item_picture = document.createElement('img');
+        item_picture.src = chat.item.imagepath;
+        item_picture.style = "height: 40px";
+        item_picture.className = "rounded"
 
         let text_container = document.createElement('div');
         text_container.className='col-8';
@@ -169,7 +173,7 @@
         let itemName = document.createElement('strong');
         itemName.innerText = chat.item.name;
         itemName.id = chat.item.pk;
-        let partnerName = document.createElement('div');
+        let partnerName = document.createElement('strong');
         partnerName.className = 'mb-1';
         if(chat.participant1.pk == '{{ request.user.pk }}') {
             partnerName.innerText =  chat.participant2.name;
@@ -194,15 +198,16 @@
         }
        
 
-        profile_picture_container.appendChild(profile_picture);
+        item_picture_container.appendChild(item_picture);
 
         text_container.appendChild(itemName);
+        text_container.appendChild(document.createElement("br"))
         text_container.appendChild(partnerName);
         text_container.appendChild(date);
         text_container.appendChild(lastMessage);
         
                 
-        row.appendChild(profile_picture_container);
+        row.appendChild(item_picture_container);
         row.appendChild(text_container);
 
         clickableListItem.appendChild(row);
@@ -240,7 +245,7 @@
         if(weeks < 5) {
             return weeks+"w";
         }
-        return "more than a motnh";
+        return "more than a month";
     }
 
     let updateSidebarItemElapsedTime = () => {
@@ -291,7 +296,8 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
-        console.log(message)
+        console.log(message);
+        console.log(document.getElementsByClassName("chat-list-group-item active")[0].getElementsByTagName("strong")[1].id);
         if(!isWhitespaceString(message)) {
             chatSocket.send(JSON.stringify({
                 'item': document.getElementsByClassName("chat-list-group-item active")[0].getElementsByTagName("strong")[0].id,

@@ -12,5 +12,7 @@ urlpatterns = [
     path('my-ads/', views.my_ads, name='my_ads' ),
     path('edit_item/<int:item_id>/', views.edit_item, name='edit_item'),
     path('my_profile/', views.my_profile, name='my_profile'),
-    path('change_password/', views.change_password, name='change_password')
+    path('change_password/', views.change_password, name='change_password'),
+    path('advertisers/', views.advertisers, name='advertisers'),
+    path('advertisers/add_score/<int:user_id>/', views.add_score, name='add_score')
 ]

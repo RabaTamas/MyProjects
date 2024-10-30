@@ -3,11 +3,15 @@ import os
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
-from .forms import UserSignUpForm, ProfileSignUpForm, CreateListingForm, EditListingForm, UserEditForm, UserPasswordChangeForm
+from .forms import UserSignUpForm, ProfileSignUpForm, CreateListingForm, EditListingForm, UserEditForm, UserPasswordChangeForm, ScoreForm
 from django.contrib import messages
 from items.models import Item, ItemCondition, Sport
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from .models import Profile, Score
+from django.contrib.auth.models import User
+from django.db.models import Avg
+from django.db.models import Q
 
 # Create your views here.
 def get_header_images():
@@ -120,7 +124,8 @@ def signup_user(request):
 def item(request, pk):
     current_item = get_object_or_404(Item, id=pk)
     
-    related_items = Item.objects.filter(sport=current_item.sport).exclude(id=current_item.id)
+    items = Item.objects.exclude(id=current_item.id)
+    related_items = items.filter(sold = False, sport=current_item.sport)
 
     return render(request, 'item.html', {
         'item': current_item,
@@ -207,3 +212,71 @@ def change_password(request):
             return redirect('change_password')
     else:
         return render(request, 'change_password.html', {'form': UserPasswordChangeForm(request.user)})
+
+def advertisers(request):
+    search_query = request.GET.get('search', '').strip()
+    sort_option = request.GET.get('sort')
+    page = request.GET.get('page', 1)  # A jelenlegi oldal lekérdezése
+    
+    advertisers = Profile.objects.annotate(average_score=Avg('user__received_scores__score'))
+
+    if search_query:
+        advertisers = advertisers.filter(
+            Q(user__first_name__icontains=search_query) |
+            Q(user__last_name__icontains=search_query)
+        )
+
+    if sort_option == 'name_asc':
+        advertisers = advertisers.order_by('user__first_name')
+    elif sort_option == 'name_desc':
+        advertisers = advertisers.order_by('-user__first_name')
+    elif sort_option == 'score_asc':
+        advertisers = advertisers.order_by('average_score')
+    elif sort_option == 'score_desc':
+        advertisers = advertisers.order_by('-average_score')
+
+    paginator = Paginator(advertisers, 10) 
+    try:
+        advertisers = paginator.page(page)
+    except PageNotAnInteger:
+        advertisers = paginator.page(1)
+    except EmptyPage:
+        advertisers = paginator.page(paginator.num_pages)
+
+    user_scores = {}
+    if request.user.is_authenticated:
+        for advertiser in advertisers:
+            try:
+                score = Score.objects.get(rater_user=request.user, rated_user=advertiser.user)
+                user_scores[advertiser.user.id] = score
+            except Score.DoesNotExist:
+                user_scores[advertiser.user.id] = None
+
+    form = ScoreForm()
+    return render(request, 'advertisers.html', {
+        'advertisers': advertisers,
+        'form': form,
+        'sort_option': sort_option,
+        'user_scores': user_scores,
+        'images': json.dumps(get_header_images())
+    })
+
+@login_required
+def add_score(request, user_id):
+    rated_user = get_object_or_404(User, id=user_id)
+    if rated_user == request.user:
+        return redirect('advertisers')  
+    if request.method == 'POST':
+        form = ScoreForm(request.POST)
+        if form.is_valid():
+            score, created = Score.objects.update_or_create(
+                rater_user=request.user,
+                rated_user=rated_user,
+                defaults={'score': form.cleaned_data['score']}
+            )
+            messages.success(request, "Score updated successfully!" if not created else "Score added successfully!")
+            return redirect('advertisers')
+    else:
+        form = ScoreForm()
+
+    return render(request, 'add_score.html', {'form': form, 'rated_user': rated_user})

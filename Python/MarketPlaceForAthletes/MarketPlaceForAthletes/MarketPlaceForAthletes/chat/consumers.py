@@ -34,11 +34,15 @@ class ChatConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         
         sender = User.objects.filter(pk = int(text_data_json['sender'])).first()
-        receiver = User.objects.filter(pk = int(text_data_json['receiver'])).first()
+        item = Item.objects.filter(pk = int(text_data_json['item'])).first()
+        receiver = None
+        try:
+            receiver = User.objects.filter(pk = int(text_data_json['receiver'])).first()
+        except:
+            receiver = item.advertiser.user
         participant1 = sender
         participant2 = receiver
         print(text_data_json['item'])
-        item = Item.objects.filter(pk = int(text_data_json['item'])).first()
         chat = Chat.GetChatByParticipants(participant1, participant2, item, True) #None
         
         message_string = text_data_json["message"]

@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Score
 from items.models import Item, Sport, ItemCondition
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 
@@ -200,3 +200,12 @@ class UserPasswordChangeForm(PasswordChangeForm):
         label='', 
         widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Confirm New Password'})
     )
+
+
+class ScoreForm(forms.ModelForm):
+    class Meta:
+        model = Score
+        fields = ['score']
+        widgets = {
+            'score': forms.NumberInput(attrs={'min': 1, 'max': 5})
+        }

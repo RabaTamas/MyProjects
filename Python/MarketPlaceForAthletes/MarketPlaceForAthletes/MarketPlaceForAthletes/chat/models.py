@@ -28,6 +28,10 @@ class Chat(models.Model):
     @staticmethod
     def GetChatByParticipant(participant):
         return Chat.objects.filter(participant1 = participant) | Chat.objects.filter(participant2 = participant)
+    
+    @staticmethod
+    def GetChatByItem(item):
+        return Chat.objects.filter(item = item)
 
     @staticmethod
     def GetChatById(id):

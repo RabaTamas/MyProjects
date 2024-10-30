@@ -76,28 +76,30 @@
                 </div>
                 <!-- Main content (items list) -->
                 <div class="col-md-9">
+                    {% if page_obj %}
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                         {% for item in page_obj %}
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
-                                <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                                <img class="card-img-top" src="{{ item.image.url }}" alt="..." style="width: 100%; height: 200px; object-fit: cover;" />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <h5 class="fw-bolder">{{ item.name }}</h5>
-                                        <p>Condition: {{ item.condition }}</p>
-                                        <p>Price: {{ item.price }} Ft</p>
+                                        <p>{{ item.condition }}</p>
+                                        <p>{{ item.price }} Ft</p>
                                     </div>
                                 </div>
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item' item.id %}">View</a></div>
+                                <div class="card-footer p-0 bg-transparent">
+                                    <div class="text-center w-100">
+                                        <a class="btn btn-outline-dark w-100 h-100" href="{% url 'item' item.id %}">View</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-
 
                     <!-- Pagination -->
                     <nav aria-label="Page navigation">
@@ -125,6 +127,13 @@
                             {% endif %}
                         </ul>
                     </nav>
+
+                    {% else %}
+                    <!-- No results message -->
+                    <div class="alert alert-warning text-center">
+                        There is no such product!
+                    </div>
+                    {% endif %}
 
                     
                 </div>
