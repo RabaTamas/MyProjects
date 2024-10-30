@@ -44,7 +44,9 @@
                                             {% if advertiser.items.exists %}
                                                 <ul>
                                                     {% for item in advertiser.items.all %}
+                                                    {% if not item.sold %}
                                                     <li><a href="{% url 'item' item.id %}">{{ item.name }}</a></li>
+                                                    {% endif %}
                                                     {% endfor %}
                                                 </ul>
                                             {% else %}
