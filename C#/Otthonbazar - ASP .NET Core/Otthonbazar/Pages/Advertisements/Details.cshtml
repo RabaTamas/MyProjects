@@ -1,0 +1,79 @@
+﻿@page
+@model Otthonbazar.Pages.Advertisements.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Advertisement</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.BuildDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.BuildDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.HalfRoom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.HalfRoom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.ImageUrl)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.Room)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.Room)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.AdvertisementType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.AdvertisementType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Advertisement.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Advertisement.City.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Advertisement?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,159 @@
+﻿@page
+@model Otthonbazar.Pages.Advertisements.CreateModel
+
+@{
+    ViewData["Title"] = "Hirdetés feladása";
+}
+
+<h1>Hirdetés feladása</h1>
+
+<form method="post">
+<div class="row">
+    <div class="col-7">
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.City.Zip" class="form-label"></label>
+            </div>
+            <div class="col-2">
+                <input asp-for="Advertisement.City.Zip" class="form-control" id="City_Zip" />
+            </div>
+            <div class="col-7">
+                <input asp-for="Advertisement.City.Name" class="form-control" id="City_Name" />
+            </div>
+            <span asp-validation-for="Advertisement.City.Zip" class="form-text text-danger"></span>
+            <span asp-validation-for="Advertisement.City.Name" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.Address" class="form-label"></label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Advertisement.Address" class="form-control" />
+            </div>
+            <span asp-validation-for="Advertisement.Address" class="form-text text-danger"></span>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.AdvertisementType" class="form-label"></label>
+            </div>
+            <div class="col-9">
+                <select asp-for="Advertisement.AdvertisementType" class="form-control" asp-items="Html.GetEnumSelectList<Otthonbazar.Data.AdvertisementType>()">
+                </select>
+            </div>
+            <span asp-validation-for="Advertisement.AdvertisementType" class="form-text text-danger"></span>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.Price" class="form-label"></label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input asp-for="Advertisement.Price" class="form-control" />
+                    <span class="input-group-text">M Ft</span>
+                </div>
+            </div>
+            <span asp-validation-for="Advertisement.Price" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.Size" class="form-label"></label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input asp-for="Advertisement.Size" class="form-control" />
+                    <span class="input-group-text">m²</span>
+                </div>
+            </div>
+            <span asp-validation-for="Advertisement.Size" class="form-text text-danger"></span>
+        </div>
+
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.Room" class="form-label"></label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input asp-for="Advertisement.Room" class="form-control" />
+                    <span class="input-group-text">szoba</span>
+                </div>
+            </div>
+            <span asp-validation-for="Advertisement.Room" class="form-text text-danger"></span>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.HalfRoom" class="form-label"></label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input asp-for="Advertisement.HalfRoom" class="form-control" />
+                    <span class="input-group-text">fél szoba</span>
+                </div>
+            </div>
+            <span asp-validation-for="Advertisement.HalfRoom" class="form-text text-danger"></span>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.BuildDate" class="form-label"></label>
+            </div>
+            <div class="col-4">
+                <input asp-for="Advertisement.BuildDate" class="form-control" />
+            </div>
+            <span asp-validation-for="Advertisement.BuildDate" class="form-text text-danger"></span>
+        </div>
+
+
+    </div>
+    <div class="col-5">
+        <div class="row g-3 mb-3">
+            <div class="col-12">
+                <label asp-for="Advertisement.Description" class="form-label"></label>
+                <textarea asp-for="Advertisement.Description" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center mb-3">
+            <div class="col-3">
+                <label asp-for="Advertisement.ImageUrl" class="form-label"></label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Advertisement.ImageUrl" type="file" class="form-control" />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="text-end mt-3">
+    <button type="submit" class="btn btn-primary">Hirdetés feladása</button>
+</div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#City_Zip").on("blur", function (event, b) {
+                // Ha nincs megadva irányítószám, akkor nem hívjuk meg az ajaxot.
+                if ($("#City_Zip").val() === "")
+                    return;
+                $.get("/Advertisements/Create?handler=Zip&zip=" + event.currentTarget.value).then(function
+                    (data) {
+                    $("#City_Name").val(data.name);
+                });
+            })
+        });
+    </script>
+}
+

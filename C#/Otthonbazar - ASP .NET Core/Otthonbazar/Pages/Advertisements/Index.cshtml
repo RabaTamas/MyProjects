@@ -1,0 +1,118 @@
+﻿@page "/"
+@model Otthonbazar.Pages.Advertisements.IndexModel
+
+@{
+    ViewData["Title"] = "Hirdetések";
+}
+
+<div class="container">
+    <div class="row">
+        <section class="col-lg-4">
+            <h2>Keresés</h2>
+            <form method="get">
+                <div class="mb-3">
+                    <label asp-for="Search.CityName" class="form-label"></label>
+                    <input asp-for="Search.CityName" class="form-control" />
+                </div>
+
+                <div class="row mb-3">
+                    <label asp-for="Search.PriceMin" class="form-label"></label>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.PriceMin" class="form-control" />
+                            <span class="input-group-text">M Ft</span>
+                        </div>
+                    </div>
+                    <span class="col-2 text-center">&ndash;</span>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.PriceMax" class="form-control" />
+                            <span class="input-group-text">M Ft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label asp-for="Search.SizeMin" class="form-label"></label>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.SizeMin" class="form-control" />
+                            <span class="input-group-text">m²</span>
+                        </div>
+                    </div>
+                    <span class="col-2 text-center">&ndash;</span>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.SizeMax" class="form-control" />
+                            <span class="input-group-text">m²</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label asp-for="Search.RoomMin" class="form-label"></label>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.RoomMin" class="form-control" />
+                            <span class="input-group-text">szoba</span>
+                        </div>
+                    </div>
+                    <span class="col-2 text-center">&ndash;</span>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <input asp-for="Search.RoomMax" class="form-control" />
+                            <span class="input-group-text">szoba</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <input type="submit" value="Keresés" class="btn btn-light" />
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="col-lg-8">
+            <h2>Hirdetések</h2>
+            <div class="row row-cols-2 g-10">
+                @foreach (var item in Model.Advertisement)
+                {
+                    <article class="col" style="width: 340px">
+                        <div class="card h-100">
+                            <a asp-page="./Details" asp-route-id="@item.Id">
+                                <img src="@(!string.IsNullOrEmpty(item.ImageUrl) ? Url.Content("~/images/" + item.ImageUrl) : "https://via.placeholder.com/340x255")"
+                                     class="card-img-top img-fluid" alt="Hirdetés képe">
+                            </a>
+
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="fw-bold">@item.Price MFt</span>
+                                    <span class="fw-bold float-end">@item.Size m²</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <span>@item.BuildDate @item.City.Name</span>
+                                    <span class="float-end">@item.Address</span>
+                                </div>
+
+
+                                <div class="mt-2">
+                                    <span>@Html.DisplayFor(modelItem => item.AdvertisementType)</span>
+                                </div>
+
+                                <div class="mt-2">
+                                    <dl>
+                                        <dd>Szobák</dd>
+                                        <dt class="fw-bold">@item.Room + @item.HalfRoom</dt>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    </div>
+</div>
