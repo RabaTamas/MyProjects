@@ -1,3 +1,3 @@
-# Picture aout this project:
+# Picture about this project:
 ![](home.png)
 
