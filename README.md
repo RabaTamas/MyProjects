@@ -1,6 +1,6 @@
 # MyProjects
 
-Here you can find my biggest projects, which I did during my university years. 
+Here you can find my biggest projects, which I did during my BSc university years. 
 I have grouped my works into separate folders according to programming languages or web application frameworks. In addition, there is a folder for my Kubernetes project.
 
 # Preview of some of my works
